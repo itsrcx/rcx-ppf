@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "installation cmd on system"
+      - echo "installation cmds on system"
   pre_build:
     commands:
       - echo "pre-build stage in code deploy"

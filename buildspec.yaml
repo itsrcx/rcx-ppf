@@ -1,0 +1,14 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo "installation cmd on system"
+  pre_build:
+    commands:
+      - echo "pre-build stage in code deploy"
+  build:
+    commands:
+      - grep -Fq "Raman" index.html
+  post_build:
+    commands:
+      - echo "Build complete"

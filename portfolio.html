@@ -11,10 +11,13 @@
     <header>
         <nav>
             <div class="logo">Raman Chauhan</div>
-            <ul>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="skills.html">Skills</a></li>
-                <li><a href="projects.html">Projects</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="portfolio.html" class="active">Portfolio</a></li>
             </ul>
@@ -25,18 +28,45 @@
     </header>
 
     <main>
-        <section id="portfolio" class="card">
-            <h1>My Portfolio</h1>
-            <div class="portfolio-grid">
+        <section id="portfolio">
+            <div class="page-container">
+                <h1>My Portfolio</h1>
+                <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <a href="https://github.com/itsrcx/online-book-store.git" class="btn" target="_blank">View on GitHub</a>
-                    <p>E-commerce platform for books</p>
+                    <div class="project-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Online Book Store</h3>
+                        <p>E-commerce platform for books with user authentication, shopping cart, and payment integration.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">SQLite</span>
+                        </div>
+                        <a href="https://github.com/itsrcx/online-book-store.git" class="project-btn" target="_blank">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                    </div>
                 </div>
                 <div class="portfolio-item">
-                    <a href="https://github.com/itsrcx/learnDjango.git" class="btn" target="_blank">View on GitHub</a>
-                    <p>Blogging project using Django</p>
+                    <div class="project-icon">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Django Blog</h3>
+                        <p>Full-featured blogging platform with user management, post creation, and comment system.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                        <a href="https://github.com/itsrcx/learnDjango.git" class="project-btn" target="_blank">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                    </div>
                 </div>
-                <!-- Add more portfolio items as needed -->
+                </div>
             </div>
         </section>
     </main>

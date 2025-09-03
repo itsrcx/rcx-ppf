@@ -37,4 +37,80 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // Skill progress bar animation
+    const skillItems = document.querySelectorAll('.skill-item');
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target.querySelector('.skill-progress');
+                if (progressBar && !progressBar.classList.contains('animated')) {
+                    const width = progressBar.getAttribute('data-width');
+                    progressBar.style.setProperty('--progress-width', width + '%');
+                    progressBar.style.width = width + '%';
+                    progressBar.classList.add('animated');
+                }
+            }
+        });
+    }, observerOptions);
+
+    skillItems.forEach(item => {
+        skillObserver.observe(item);
+    });
+
+    // Fallback for immediate animation on desktop
+    setTimeout(() => {
+        skillItems.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isVisible) {
+                const progressBar = item.querySelector('.skill-progress');
+                if (progressBar && !progressBar.classList.contains('animated')) {
+                    const width = progressBar.getAttribute('data-width');
+                    progressBar.style.width = width + '%';
+                    progressBar.classList.add('animated');
+                }
+            }
+        });
+    }, 500);
+
+    // Add stagger animation to cards
+    const cards = document.querySelectorAll('.cert-card, .portfolio-item, .detail-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('fade-in-up');
+    });
+
+    // Mobile navigation toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = navToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = navToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    }
 });

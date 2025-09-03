@@ -47,6 +47,7 @@ nav {
     width: 100%;
     margin: 0 auto;
     position: relative;
+    padding: 0 1rem;
 }
 
 .nav-toggle {
@@ -55,6 +56,19 @@ nav {
     cursor: pointer;
     font-size: 1.5rem;
     color: var(--text-color);
+    z-index: 1001;
+}
+
+.theme-toggle {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--accent-color);
 }
 
 .nav-menu {
@@ -225,42 +239,51 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem 0;
-    flex-direction: row; /* Ensure the image is on the right side */
+    padding: 2rem 1rem;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .hero-content {
     max-width: 600px;
-    margin-right: 2rem; /* Space between text and image */
-    text-align: left; /* Align text to the left */
+    margin-right: 2rem;
+    text-align: left;
+    flex: 1;
 }
 
 .hero-image {
-    max-width: 200px; /* Make the image smaller */
-    flex-shrink: 0; /* Prevent the image from shrinking */
+    max-width: 200px;
+    flex-shrink: 0;
 }
 
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+}
+
+/* Mobile hero section fix */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
-
-    nav ul {
-        margin-top: 1rem;
-    }
-
     .hero {
-        flex-direction: column; /* Stack image and text on smaller screens */
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
     }
 
     .hero-content {
-        text-align: center; /* Center text on smaller screens */
+        text-align: center;
         margin-right: 0;
         margin-bottom: 2rem;
+        max-width: 100%;
     }
 
     .hero-image {
-        margin-top: 1rem;
+        margin-top: 0;
+        max-width: 180px;
+        order: -1;
+        margin-bottom: 1.5rem;
     }
 }
 
@@ -394,6 +417,11 @@ footer {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         padding: 1rem;
+    }
+    
+    .cert-card {
+        max-width: 400px;
+        margin: 0 auto;
     }
     
 
@@ -545,7 +573,7 @@ footer {
 
 /* Enhanced About Styles */
 .about-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 2rem 0;
 }
@@ -581,6 +609,7 @@ footer {
     gap: 1rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .detail-card:hover {
@@ -688,13 +717,60 @@ footer {
     color: inherit;
 }
 
+/* Ensure proper spacing on all devices */
+@media (max-width: 600px) {
+    .detail-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .detail-icon {
+        align-self: center;
+    }
+    
+    .contact-item span {
+        font-size: 0.9rem;
+        word-break: break-word;
+    }
+    
+    .tech-stack {
+        gap: 0.3rem;
+    }
+    
+    .project-content h3,
+    .cert-content h3,
+    .detail-content h3 {
+        font-size: 1.2rem;
+    }
+}
+
 /* Responsive Design */
 
+/* Tablet styles */
+@media (max-width: 1024px) {
+    .page-container {
+        padding: 2.5rem 1.5rem;
+        margin: 1.5rem 1rem;
+    }
+    
+    .skills-container,
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .about-details {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
 
 @media (max-width: 992px) {
     .hero {
         flex-direction: column;
         text-align: center;
+        padding: 1.5rem 0;
     }
     
     .hero-content {
@@ -703,13 +779,29 @@ footer {
     }
     
     .credly-embed {
-        width: 180px;
-        height: 240px;
+        width: 200px;
+        height: 250px;
     }
     
     .certifications-container {
         grid-template-columns: 1fr;
-        max-width: 400px;
+        max-width: 500px;
+        gap: 2rem;
+    }
+    
+    .skills-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .about-details {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 
@@ -788,14 +880,17 @@ footer {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 0;
         flex-direction: column;
         background-color: var(--secondary-bg-color);
         width: 100%;
+        height: 100vh;
         text-align: center;
-        transition: 0.3s;
+        transition: left 0.3s ease;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         z-index: 1000;
+        padding-top: 80px;
+        justify-content: flex-start;
     }
     
     .nav-menu.active {
@@ -803,17 +898,28 @@ footer {
     }
     
     .nav-menu li {
-        margin: 1rem 0;
+        margin: 0;
+        width: 100%;
     }
     
     .nav-menu li a {
-        padding: 1rem;
+        padding: 1.5rem 2rem;
         display: block;
         border-bottom: 1px solid rgba(52, 152, 219, 0.1);
+        width: 100%;
+        font-size: 1.1rem;
     }
     
     nav {
         padding: 1rem;
+        background-color: var(--secondary-bg-color);
+        position: relative;
+        z-index: 1001;
+    }
+    
+    .theme-toggle {
+        position: relative;
+        z-index: 1002;
     }
     
     h1 {
@@ -824,14 +930,14 @@ footer {
     .portfolio-grid,
     .about-details {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
         padding: 1rem;
     }
     
     .skill-item {
-        flex-direction: column;
-        text-align: center;
-        padding: 1rem;
+        flex-direction: row;
+        text-align: left;
+        padding: 1.5rem;
     }
     
     .cert-card,
@@ -842,16 +948,20 @@ footer {
     
     .page-container {
         padding: 2rem 1rem;
-        margin: 1rem;
+        margin: 1rem 0.5rem;
     }
     
     .credly-embed {
-        width: 150px;
-        height: 200px;
+        width: 200px;
+        height: 250px;
     }
     
     .contact-grid {
         grid-template-columns: 1fr;
+    }
+    
+    main {
+        padding: 1rem;
     }
 }
 
@@ -860,13 +970,13 @@ footer {
         font-size: 1.2rem;
     }
     
-    nav ul li {
-        margin: 0.25rem;
+    nav {
+        padding: 0.8rem 1rem;
     }
     
-    nav ul li a {
-        font-size: 0.9rem;
-        padding: 0.5rem;
+    .nav-menu li a {
+        font-size: 1rem;
+        padding: 1.2rem 1.5rem;
     }
     
     h1 {
@@ -874,24 +984,33 @@ footer {
     }
     
     .hero-content {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
     }
     
     .hero-image {
         max-width: 150px;
     }
     
-    .skill-item,
+    .skill-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.2rem;
+    }
+    
     .cert-card,
     .portfolio-item,
     .detail-card {
-        padding: 1rem;
+        padding: 1.2rem;
+    }
+    
+    .page-container {
         margin: 0.5rem;
+        padding: 1.5rem 1rem;
     }
     
     .credly-embed {
-        width: 120px;
-        height: 180px;
+        width: 180px;
+        height: 220px;
     }
     
     .tech-stack {
@@ -899,28 +1018,28 @@ footer {
     }
     
     .tech-tag {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.6rem;
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
     }
     
     .project-btn,
     .cert-link {
-        padding: 0.6rem 1rem;
+        padding: 0.7rem 1.2rem;
         font-size: 0.9rem;
     }
     
     .contact-section {
-        padding: 1rem;
+        padding: 1.2rem;
     }
     
     .contact-item {
-        padding: 0.8rem;
+        padding: 1rem;
         font-size: 0.9rem;
     }
     
     .social-links a {
-        font-size: 1.5rem;
-        margin: 0 0.5rem;
+        font-size: 1.8rem;
+        margin: 0 0.8rem;
     }
 }
 
@@ -929,22 +1048,19 @@ footer {
         font-size: 1rem;
     }
     
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    nav ul li {
-        margin: 0.2rem;
-    }
-    
     h1 {
         font-size: 1.5rem;
+        line-height: 1.3;
+    }
+    
+    .page-container {
+        margin: 0.25rem;
+        padding: 1rem 0.75rem;
     }
     
     .credly-embed {
-        width: 100px;
-        height: 150px;
+        width: 160px;
+        height: 200px;
     }
     
     .skill-icon {
@@ -953,6 +1069,14 @@ footer {
     
     .project-icon {
         font-size: 2.5rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.4rem;
+    }
+    
+    .hero-image {
+        max-width: 140px;
     }
 }
 
